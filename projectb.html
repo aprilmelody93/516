@@ -1,0 +1,43 @@
+<script>
+
+let userString = prompt("Enter text.")
+let userShift = prompt("Enter shift.")
+let newString = ""
+
+for (let i = 0; i < userString.length; i++) {
+  let asciiCode = userString.charCodeAt(i);
+  let letterCode = asciiCode + Number(userShift);
+  if (userShift > 26) {
+    userShift = userShift % 26
+  }
+ 
+  //Uppercase
+  if ((asciiCode >= 65) && (asciiCode <= 90)) {
+    if (letterCode > 90) {
+      letterCode += -26
+  } else if (letterCode < 65) {
+    letterCode += 26
+  }
+}
+ 
+  //Lowercase
+  else if ((asciiCode >= 97) && (asciiCode <= 122)) {
+  if (letterCode < 97) {
+    letterCode += 26
+  } else if (letterCode > 122) {
+    letterCode += -26
+  }
+}
+
+  //Other symbols
+  else {
+    letterCode = userString.charCodeAt(i);
+  }
+
+  //New String
+  let scrambledCode = String.fromCharCode(letterCode);
+  newString += scrambledCode; 
+}
+  alert(newString)
+
+</script>
