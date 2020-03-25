@@ -1,0 +1,76 @@
+<script>
+
+let prepDirectory = {
+	"at" : 0,
+	"in" : 0,
+	"from" : 0,
+	"by" : -2,
+	"with" : -1,
+}
+
+let worstPrep = "at";
+function calculateWorstPrep() {
+	for(let k in prepDirectory) {
+		if(prepDirectory[k] < prepDirectory[worstPrep]) {
+			worstPrep = k
+		}
+	}
+}
+
+const preposition = {
+	"at" : [
+	"I am mad at you.", 
+	"I am at your house.", 
+	"I am at my wits' end.", 
+	"My email is april.melody at gmail.com",
+	"We are at a crossroads.",
+	], 
+	"with" : [
+	"You are in love with me.",
+	"You are obsessed with me.",
+	"He is bursting with happiness.",
+	"She is out with the Coronavirus.",
+	"We are disappointed with your performance.",
+	],
+	"in" : [
+	"They got in my head.",
+	"My parents are disappointed in me...but what else is new?",
+	"There's candy in that white van.",
+	"We trust in God.",
+	"When they walk in, yell surprise.",
+	],
+	"from" : [
+	"Those flowers are from your secret admirer.",
+	"Where are you from?",
+	"I am from where you are not.",
+	"I have walked from the East to the West.",
+	"I received a message from a mysterious voice.",
+	],
+	"by" : [
+	"Nothing gets by me!",
+	"Oh, and by the way, you're fired.",
+	"Ah! We were hacked by the Russians!",
+	"This looks like it was drawn by a 2 year old. C-.",
+	"This cashmere blanket was handwoven by a village of a hundred blind nuns.",
+	],
+}
+
+calculateWorstPrep();
+while(prepDirectory[worstPrep] < 5) {
+	let displaySentence = preposition[worstPrep][Math.floor(Math.random() * 5)];
+	let string = displaySentence;
+	let replace = string.replace(worstPrep, "_____");
+	let userInput = prompt(replace);
+	if (userInput == worstPrep) {
+		prepDirectory[worstPrep] += 1;
+		alert("You are correct!")
+	}
+	else {
+		alert ("Incorrect. The correct answer is: " + worstPrep);
+	}
+	calculateWorstPrep();
+	}
+	alert("Congratulations! You are now a prepositions master!");
+
+
+</script>
