@@ -1,0 +1,9 @@
+<script>
+
+	let myString = prompt("Enter a sentence.");
+
+	let replacedString = myString.replace(/([aeiouy])/g, "aig$1").replace(/(?<!aig[aeiouy])aige/gm, "e");
+
+	alert(replacedString);
+
+</script>
