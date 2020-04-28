@@ -1,0 +1,56 @@
+<p>Input:<br><textarea id="input" rows="10" cols="80"></textarea>
+<p><button onclick="process()">Process</button>
+<p>Output:<br><textarea id="output" rows="10" cols="80"></textarea>
+
+<script>
+
+function process() {
+  let userInput = document.getElementById("input").value;
+	let noSpaceSpecial = userInput.replace(/([^a-zA-Z0-9']+)/gm, " ").replace(/( ')(.+)(' )/gm, " $2 ");
+	let upperCase = noSpaceSpecial.toUpperCase();
+	let allTokens = upperCase.split(" ");
+
+	//Start inputting key/value pairs
+	let allTypes = [];
+	for (let i = 0; i < allTokens.length - 1; i++) {
+		let isInDict = false;
+    let thisToken = allTokens[i];
+    for (let t = 0; t < allTypes.length; t++) {
+      if (thisToken == allTypes[t].word) {
+        isInDict = true;
+        allTypes[t].count += 1;
+      } 
+    } 
+    let entry = {};
+    if (isInDict == false) {
+      entry.word = thisToken;
+      entry.count = 1; 
+      allTypes.push(entry)
+    }
+  }
+
+  //Sort in descending order
+  allTypes.sort(compare);
+  function compare (x, y) {
+    return y.count - x.count;
+  }
+
+  //Calcuate TTR ratio
+  let ttrRatio = allTypes.length / allTokens.length;
+
+  //Final Output
+  let finalOutput = 
+  "No. of tokens: " + allTokens.length + "\n" +
+  "No. of types: " + allTypes.length + "\n" +
+  "TTR ratio: " + ttrRatio + "\n" + "\n" +
+  "Types in descending frequency: " + "\n" 
+
+  let printOutput = "";
+  for (let i = 0; i < allTypes.length; i++) {
+    printOutput += allTypes[i].word + ": " + allTypes[i].count + "\n"
+  };
+
+  document.getElementById("output").value = finalOutput + printOutput
+}
+
+</script>
